@@ -156,19 +156,19 @@ Return ONLY the raw JSON object. No markdown, no backticks.`;
 const STATUS_CONFIG = {
   Complete: {
     icon: BadgeCheck,
-    color: "text-emerald-600",
-    bg: "bg-emerald-50",
-    border: "border-l-emerald-500",
-    badge: "bg-emerald-100 text-emerald-700",
-    glow: "shadow-emerald-100",
+    color: "text-cs-700",
+    bg: "bg-cs-50",
+    border: "border-l-cs-500",
+    badge: "bg-cs-100 text-cs-800",
+    glow: "shadow-cs-100",
   },
   Pending: {
     icon: CircleDot,
-    color: "text-amber-500",
-    bg: "bg-amber-50",
-    border: "border-l-amber-400",
-    badge: "bg-amber-100 text-amber-700",
-    glow: "shadow-amber-100",
+    color: "text-cs-500",
+    bg: "bg-cs-50",
+    border: "border-l-cs-400",
+    badge: "bg-cs-100 text-cs-700",
+    glow: "shadow-cs-100",
   },
   "Not Started": {
     icon: FileText,
@@ -181,8 +181,8 @@ const STATUS_CONFIG = {
 };
 
 const PRIORITY_CONFIG = {
-  High: "bg-red-50 text-red-600 border border-red-200",
-  Medium: "bg-amber-50 text-amber-600 border border-amber-200",
+  High: "bg-cs-50 text-cs-700 border border-cs-200",
+  Medium: "bg-cs-50 text-cs-600 border border-cs-200",
   Low: "bg-slate-50 text-slate-500 border border-slate-200",
 };
 
@@ -233,7 +233,7 @@ Generate specific step-by-step guidance for this exact business to complete "${r
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-10 gap-3">
-        <Loader2 size={24} className="animate-spin text-violet-500" />
+        <Loader2 size={24} className="animate-spin text-cs-500" />
         <p className="text-sm text-slate-500">Generating personalised guidance…</p>
       </div>
     );
@@ -242,7 +242,7 @@ Generate specific step-by-step guidance for this exact business to complete "${r
   if (error) {
     return (
       <div className="py-6 text-center">
-        <p className="text-red-400 text-sm mb-3">{error}</p>
+        <p className="text-cs-400 text-sm mb-3">{error}</p>
         <button
           onClick={loadSteps}
           className="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg px-4 py-2 font-semibold transition-colors"
@@ -260,21 +260,21 @@ Generate specific step-by-step guidance for this exact business to complete "${r
       {/* Meta info bar */}
       <div className="flex flex-wrap gap-3">
         {steps.totalTime && (
-          <div className="flex items-center gap-1.5 bg-blue-50 border border-blue-100 rounded-full px-3 py-1.5">
-            <Clock size={12} className="text-blue-500" />
-            <span className="text-xs font-semibold text-blue-700">{steps.totalTime}</span>
+          <div className="flex items-center gap-1.5 bg-cs-50 border border-cs-100 rounded-full px-3 py-1.5">
+            <Clock size={12} className="text-cs-500" />
+            <span className="text-xs font-semibold text-cs-700">{steps.totalTime}</span>
           </div>
         )}
         {steps.totalFees && (
-          <div className="flex items-center gap-1.5 bg-green-50 border border-green-100 rounded-full px-3 py-1.5">
-            <BadgeCheck size={12} className="text-green-500" />
-            <span className="text-xs font-semibold text-green-700">Fees: {steps.totalFees}</span>
+          <div className="flex items-center gap-1.5 bg-cs-50 border border-cs-100 rounded-full px-3 py-1.5">
+            <BadgeCheck size={12} className="text-cs-500" />
+            <span className="text-xs font-semibold text-cs-700">Fees: {steps.totalFees}</span>
           </div>
         )}
         {steps.helpline && (
-          <div className="flex items-center gap-1.5 bg-purple-50 border border-purple-100 rounded-full px-3 py-1.5">
-            <Phone size={12} className="text-purple-500" />
-            <span className="text-xs font-semibold text-purple-700">Helpline: {steps.helpline}</span>
+          <div className="flex items-center gap-1.5 bg-cs-50 border border-cs-100 rounded-full px-3 py-1.5">
+            <Phone size={12} className="text-cs-500" />
+            <span className="text-xs font-semibold text-cs-700">Helpline: {steps.helpline}</span>
           </div>
         )}
       </div>
@@ -296,16 +296,16 @@ Generate specific step-by-step guidance for this exact business to complete "${r
           ) : (
             <button
               onClick={() => setShowVideo(true)}
-              className="w-full flex items-center gap-4 bg-gradient-to-r from-red-50 to-orange-50 hover:from-red-100 hover:to-orange-100 transition-colors px-5 py-4 text-left"
+              className="w-full flex items-center gap-4 bg-gradient-to-r from-cs-50 to-cs-100 hover:from-red-100 hover:to-orange-100 transition-colors px-5 py-4 text-left"
             >
-              <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 bg-cs-500 rounded-full flex items-center justify-center flex-shrink-0">
                 <Youtube size={18} className="text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-bold text-red-600 uppercase tracking-wide mb-0.5">Video Guide</p>
+                <p className="text-xs font-bold text-cs-700 uppercase tracking-wide mb-0.5">Video Guide</p>
                 <p className="text-sm font-semibold text-slate-800 truncate">{video.title}</p>
               </div>
-              <PlayCircle size={20} className="text-red-400 flex-shrink-0" />
+              <PlayCircle size={20} className="text-cs-400 flex-shrink-0" />
             </button>
           )}
         </div>
@@ -323,11 +323,11 @@ Generate specific step-by-step guidance for this exact business to complete "${r
           >
             {/* Step number */}
             <div className="flex flex-col items-center">
-              <div className="w-7 h-7 rounded-full bg-violet-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
+              <div className="w-7 h-7 rounded-full bg-cs-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
                 {step.stepNumber || i + 1}
               </div>
               {i < (steps.steps.length - 1) && (
-                <div className="w-px flex-1 bg-violet-100 mt-1" />
+                <div className="w-px flex-1 bg-cs-100 mt-1" />
               )}
             </div>
 
@@ -338,15 +338,15 @@ Generate specific step-by-step guidance for this exact business to complete "${r
 
               {/* Documents needed */}
               {step.documents?.length > 0 && (
-                <div className="bg-blue-50 border border-blue-100 rounded-lg px-3 py-2 mb-2">
-                  <p className="text-[10px] font-bold text-blue-600 uppercase tracking-wide mb-1.5">
+                <div className="bg-cs-50 border border-cs-100 rounded-lg px-3 py-2 mb-2">
+                  <p className="text-[10px] font-bold text-cs-600 uppercase tracking-wide mb-1.5">
                     Documents Needed
                   </p>
                   <ul className="space-y-0.5">
                     {step.documents.map((doc, di) => (
                       <li key={di} className="flex items-start gap-1.5">
-                        <ArrowRight size={10} className="text-blue-400 mt-0.5 flex-shrink-0" />
-                        <span className="text-xs text-blue-700">{doc}</span>
+                        <ArrowRight size={10} className="text-cs-400 mt-0.5 flex-shrink-0" />
+                        <span className="text-xs text-cs-700">{doc}</span>
                       </li>
                     ))}
                   </ul>
@@ -355,11 +355,11 @@ Generate specific step-by-step guidance for this exact business to complete "${r
 
               {/* Tip */}
               {step.tip && (
-                <div className="bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
-                  <p className="text-[10px] font-bold text-amber-600 uppercase tracking-wide mb-0.5">
+                <div className="bg-cs-50 border border-cs-100 rounded-lg px-3 py-2">
+                  <p className="text-[10px] font-bold text-cs-600 uppercase tracking-wide mb-0.5">
                     💡 Pro Tip
                   </p>
-                  <p className="text-xs text-amber-700">{step.tip}</p>
+                  <p className="text-xs text-cs-700">{step.tip}</p>
                 </div>
               )}
             </div>
@@ -369,15 +369,15 @@ Generate specific step-by-step guidance for this exact business to complete "${r
 
       {/* Important notes */}
       {steps.importantNotes?.length > 0 && (
-        <div className="bg-red-50 border border-red-100 rounded-xl p-4">
-          <p className="text-xs font-bold text-red-600 uppercase tracking-wide mb-2">
+        <div className="bg-cs-50 border border-cs-100 rounded-xl p-4">
+          <p className="text-xs font-bold text-cs-700 uppercase tracking-wide mb-2">
             ⚠️ Important Notes
           </p>
           <ul className="space-y-1.5">
             {steps.importantNotes.map((note, ni) => (
               <li key={ni} className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0" />
-                <span className="text-xs text-red-700">{note}</span>
+                <div className="w-1.5 h-1.5 rounded-full bg-cs-400 mt-1.5 flex-shrink-0" />
+                <span className="text-xs text-cs-700">{note}</span>
               </li>
             ))}
           </ul>
@@ -390,7 +390,7 @@ Generate specific step-by-step guidance for this exact business to complete "${r
           href={getPortalUrl(reg.name, reg.portal)}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 bg-violet-600 text-white rounded-xl px-4 py-2.5 text-xs font-bold hover:bg-violet-700 transition-colors shadow-lg shadow-violet-200"
+          className="flex items-center gap-1.5 bg-cs-600 text-white rounded-xl px-4 py-2.5 text-xs font-bold hover:bg-cs-700 transition-colors shadow-lg shadow-cs-200"
         >
           {reg.status === "Complete" ? "Visit Portal" : reg.status === "Pending" ? "Continue on Portal" : "Start Registration"}
           <ExternalLink size={11} />
@@ -400,7 +400,7 @@ Generate specific step-by-step guidance for this exact business to complete "${r
             href={`https://wa.me/919810123456?text=Hi%2C%20I%20need%20help%20with%20${encodeURIComponent(reg.name)}%20for%20my%20MSME.`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 border border-green-200 text-green-700 bg-green-50 rounded-xl px-4 py-2.5 text-xs font-bold hover:bg-green-100 transition-colors"
+            className="flex items-center gap-1.5 border border-cs-200 text-cs-700 bg-cs-50 rounded-xl px-4 py-2.5 text-xs font-bold hover:bg-cs-100 transition-colors"
           >
             <MessageCircle size={11} /> Ask CA on WhatsApp
           </a>
@@ -460,7 +460,7 @@ function RegRow({ reg, idx, profile }) {
             )}
           </div>
           {reg.deadline && (
-            <p className="text-red-500 text-xs mt-0.5 flex items-center gap-1">
+            <p className="text-cs-500 text-xs mt-0.5 flex items-center gap-1">
               <Clock size={9} /> Due: {reg.deadline}
             </p>
           )}
@@ -488,18 +488,18 @@ function RegRow({ reg, idx, profile }) {
           >
             <div className="border-t border-slate-100 px-5 py-5 bg-slate-50/60">
               {reg.description && (
-                <p className="text-slate-600 text-sm mb-5 leading-relaxed border-l-2 border-violet-200 pl-3">
+                <p className="text-slate-600 text-sm mb-5 leading-relaxed border-l-2 border-cs-200 pl-3">
                   {reg.description}
                 </p>
               )}
               <div className="flex items-center gap-2 mb-4">
-                <ListChecks size={14} className="text-violet-600" />
-                <p className="text-xs font-extrabold text-violet-700 uppercase tracking-widest">
+                <ListChecks size={14} className="text-cs-600" />
+                <p className="text-xs font-extrabold text-cs-700 uppercase tracking-widest">
                   AI Step-by-Step Guide
                 </p>
-                <div className="flex items-center gap-1 bg-violet-100 rounded-full px-2 py-0.5">
-                  <Sparkles size={9} className="text-violet-500" />
-                  <span className="text-[9px] font-bold text-violet-600">Personalised</span>
+                <div className="flex items-center gap-1 bg-cs-100 rounded-full px-2 py-0.5">
+                  <Sparkles size={9} className="text-cs-500" />
+                  <span className="text-[9px] font-bold text-cs-600">Personalised</span>
                 </div>
               </div>
               <StepGuide reg={reg} profile={profile} />
@@ -542,7 +542,7 @@ function CAHelpModal({ reg, onClose }) {
             href={`https://wa.me/919810123456?text=Hi%20Rajesh%2C%20I%20need%20help%20with%20${encodeURIComponent(reg.name)}%20for%20my%20MSME.`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 bg-green-500 text-white rounded-xl py-3 text-sm font-semibold hover:bg-green-600 transition-colors"
+            className="flex items-center justify-center gap-2 bg-cs-600 text-white rounded-xl py-3 text-sm font-semibold hover:bg-cs-700 transition-colors"
           >
             <MessageCircle size={15} /> WhatsApp Rajesh Kumar, FCA
           </a>
@@ -662,9 +662,9 @@ Be very specific — include state-specific registrations, sector-specific licen
 
           {/* AI personalisation badge */}
           <div className="flex items-center gap-2 mb-3 flex-wrap">
-            <div className="flex items-center gap-1.5 bg-violet-50 border border-violet-200 rounded-full px-3 py-1">
-              <Sparkles size={11} className="text-violet-600" />
-              <span className="text-violet-700 text-xs font-bold">
+            <div className="flex items-center gap-1.5 bg-cs-50 border border-cs-200 rounded-full px-3 py-1">
+              <Sparkles size={11} className="text-cs-600" />
+              <span className="text-cs-700 text-xs font-bold">
                 {loading
                   ? "Personalising your checklist…"
                   : aiLoaded
@@ -705,10 +705,10 @@ Be very specific — include state-specific registrations, sector-specific licen
         {/* ── STAT PILLS ── */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-7">
           {[
-            { label: "Complete", value: completed, icon: <CheckCircle2 size={15} className="text-emerald-600" />, color: "bg-emerald-50 border-emerald-100", text: "text-emerald-700" },
-            { label: "Pending", value: pending, icon: <CircleDot size={15} className="text-amber-500" />, color: "bg-amber-50 border-amber-100", text: "text-amber-700" },
+            { label: "Complete", value: completed, icon: <CheckCircle2 size={15} className="text-cs-700" />, color: "bg-cs-50 border-cs-100", text: "text-cs-700" },
+            { label: "Pending", value: pending, icon: <CircleDot size={15} className="text-cs-500" />, color: "bg-cs-50 border-cs-100", text: "text-cs-700" },
             { label: "Not Started", value: notStarted, icon: <FileText size={15} className="text-slate-500" />, color: "bg-slate-50 border-slate-100", text: "text-slate-600" },
-            { label: "High Priority", value: highPriority, icon: <AlertCircle size={15} className="text-red-500" />, color: "bg-red-50 border-red-100", text: "text-red-700" },
+            { label: "High Priority", value: highPriority, icon: <AlertCircle size={15} className="text-cs-500" />, color: "bg-cs-50 border-cs-100", text: "text-cs-700" },
           ].map(({ label, value, icon, color, text }) => (
             <div key={label} className={`border rounded-2xl p-4 ${color}`}>
               <div className="flex items-center gap-2 mb-1">
@@ -725,14 +725,14 @@ Be very specific — include state-specific registrations, sector-specific licen
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-start gap-3 bg-red-50 border border-red-100 rounded-2xl px-5 py-4 mb-6"
+            className="flex items-start gap-3 bg-cs-50 border border-cs-100 rounded-2xl px-5 py-4 mb-6"
           >
-            <AlertCircle size={18} className="text-red-500 mt-0.5 flex-shrink-0" />
+            <AlertCircle size={18} className="text-cs-500 mt-0.5 flex-shrink-0" />
             <div>
-              <p className="text-red-800 font-bold text-sm">
+              <p className="text-cs-800 font-bold text-sm">
                 {highPriority} high-priority registration{highPriority > 1 ? "s" : ""} pending
               </p>
-              <p className="text-red-600 text-xs mt-0.5">
+              <p className="text-cs-700 text-xs mt-0.5">
                 Non-compliance may result in penalties. Complete these first.
               </p>
             </div>
@@ -740,13 +740,13 @@ Be very specific — include state-specific registrations, sector-specific licen
         )}
 
         {/* ── AI Guide callout ── */}
-        <div className="flex items-start gap-3 bg-violet-50 border border-violet-100 rounded-2xl px-5 py-4 mb-7">
-          <BookOpen size={16} className="text-violet-500 mt-0.5 flex-shrink-0" />
+        <div className="flex items-start gap-3 bg-cs-50 border border-cs-100 rounded-2xl px-5 py-4 mb-7">
+          <BookOpen size={16} className="text-cs-500 mt-0.5 flex-shrink-0" />
           <div>
-            <p className="text-violet-800 font-bold text-sm">
+            <p className="text-cs-800 font-bold text-sm">
               Click any registration to get personalised step-by-step guidance
             </p>
-            <p className="text-violet-600 text-xs mt-0.5">
+            <p className="text-cs-600 text-xs mt-0.5">
               AI-generated steps, documents checklist, video tutorials, and CA support — all tailored to your business.
             </p>
           </div>
@@ -759,8 +759,8 @@ Be very specific — include state-specific registrations, sector-specific licen
               key={f}
               onClick={() => setActiveFilter(f)}
               className={`flex-shrink-0 text-xs font-bold px-4 py-2 rounded-full border transition-all ${activeFilter === f
-                  ? "bg-violet-600 text-white border-violet-600 shadow-lg shadow-violet-200"
-                  : "bg-white text-slate-500 border-slate-200 hover:border-violet-300 hover:text-violet-600"
+                  ? "bg-cs-600 text-white border-cs-600 shadow-lg shadow-cs-200"
+                  : "bg-white text-slate-500 border-slate-200 hover:border-cs-300 hover:text-cs-600"
                 }`}
             >
               {f}
@@ -828,7 +828,7 @@ Be very specific — include state-specific registrations, sector-specific licen
                 href="https://wa.me/919810123456?text=Hi%2C%20I%20need%20help%20with%20my%20MSME%20compliance%20registrations."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-green-500 text-white rounded-xl px-5 py-2.5 text-sm font-bold hover:bg-green-600 transition-colors"
+                className="flex items-center gap-2 bg-cs-600 text-white rounded-xl px-5 py-2.5 text-sm font-bold hover:bg-cs-700 transition-colors"
               >
                 <MessageCircle size={14} /> WhatsApp a CA
               </a>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -463,6 +463,36 @@ export default function Landing() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalFlow, setModalFlow] = useState("choose"); // pre-select flow
 
+  // Typewriter effect state
+  const [textIndex, setTextIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const words = ["compliance roadmap.", "GST filings.", "tax deadlines.", "statutory audits."];
+
+  useEffect(() => {
+    const currentWord = words[textIndex];
+    let timeoutId;
+    
+    if (isDeleting) {
+      if (charIndex > 0) {
+        timeoutId = setTimeout(() => setCharIndex(c => c - 1), 40);
+      } else {
+        setIsDeleting(false);
+        setTextIndex((prev) => (prev + 1) % words.length);
+      }
+    } else {
+      if (charIndex < currentWord.length) {
+        timeoutId = setTimeout(() => setCharIndex(c => c + 1), 80);
+      } else {
+        timeoutId = setTimeout(() => setIsDeleting(true), 2500);
+      }
+    }
+    
+    return () => clearTimeout(timeoutId);
+  }, [charIndex, isDeleting, textIndex]);
+
+  const currentTypingText = words[textIndex].substring(0, charIndex);
+
   function openModal(flow = "choose") {
     setModalFlow(flow);
     setModalOpen(true);
@@ -516,8 +546,163 @@ export default function Landing() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="bg-cs-900 text-cs-50 text-center px-6 py-24">
-        <AnimatePresence mode="wait">
+      <section className="bg-slate-950 text-cs-50 text-center px-6 min-h-[85vh] py-32 md:py-48 flex flex-col justify-center relative overflow-hidden">
+        {/* Dark background gradient layer */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-black opacity-80 z-0" />
+        
+        {/* The SVG Network Background */}
+        <svg viewBox="0 0 1000 600" className="absolute inset-0 w-full h-full z-0 opacity-60 pointer-events-none" preserveAspectRatio="none">
+          <defs>
+            <filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* Central AI Chip */}
+          <g filter="url(#neon-glow)">
+            <rect x="450" y="250" width="100" height="100" rx="8" fill="rgba(15, 23, 42, 0.9)" stroke="rgba(147, 197, 253, 0.6)" strokeWidth="2" />
+            <rect x="470" y="270" width="60" height="60" rx="4" fill="none" stroke="rgba(255, 255, 255, 0.4)" strokeWidth="1.5" />
+            <circle cx="500" cy="300" r="15" fill="rgba(255, 255, 255, 0.8)" />
+            {/* Chip pins */}
+            <path d="M 440 270 H 450 M 440 290 H 450 M 440 310 H 450 M 440 330 H 450" stroke="rgba(147, 197, 253, 0.5)" strokeWidth="2" />
+            <path d="M 550 270 H 560 M 550 290 H 560 M 550 310 H 560 M 550 330 H 560" stroke="rgba(147, 197, 253, 0.5)" strokeWidth="2" />
+            <path d="M 470 240 V 250 M 490 240 V 250 M 510 240 V 250 M 530 240 V 250" stroke="rgba(147, 197, 253, 0.5)" strokeWidth="2" />
+            <path d="M 470 350 V 360 M 490 350 V 360 M 510 350 V 360 M 530 350 V 360" stroke="rgba(147, 197, 253, 0.5)" strokeWidth="2" />
+          </g>
+
+          {/* Glowing Orthogonal Wires */}
+          <motion.path
+            d="M -50 150 H 200 V 270 H 440"
+            fill="none"
+            stroke="rgba(255, 255, 255, 0.4)"
+            strokeWidth="2"
+            filter="url(#neon-glow)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+          />
+          <motion.path
+            d="M -50 450 H 300 V 330 H 440"
+            fill="none"
+            stroke="rgba(147, 197, 253, 0.5)"
+            strokeWidth="2.5"
+            filter="url(#neon-glow)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 3.5, ease: "easeInOut", delay: 0.5, repeat: Infinity, repeatType: "reverse" }}
+          />
+          <motion.path
+            d="M 560 270 H 700 V 150 H 1050"
+            fill="none"
+            stroke="rgba(196, 181, 253, 0.4)"
+            strokeWidth="1.5"
+            filter="url(#neon-glow)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 4, ease: "easeInOut", delay: 1, repeat: Infinity, repeatType: "reverse" }}
+          />
+          <motion.path
+            d="M 560 330 H 800 V 450 H 1050"
+            fill="none"
+            stroke="rgba(147, 197, 253, 0.5)"
+            strokeWidth="2"
+            filter="url(#neon-glow)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 3.2, ease: "easeInOut", delay: 0.8, repeat: Infinity, repeatType: "reverse" }}
+          />
+          <motion.path
+            d="M -50 50 H 400 V 100 H 600 V 50 H 1050"
+            fill="none"
+            stroke="rgba(255, 255, 255, 0.3)"
+            strokeWidth="1"
+            filter="url(#neon-glow)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 5, ease: "easeInOut", delay: 1.5, repeat: Infinity, repeatType: "reverse" }}
+          />
+          <motion.path
+            d="M -50 550 H 350 V 500 H 650 V 550 H 1050"
+            fill="none"
+            stroke="rgba(255, 255, 255, 0.3)"
+            strokeWidth="1"
+            filter="url(#neon-glow)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 4.5, ease: "easeInOut", delay: 0.2, repeat: Infinity, repeatType: "reverse" }}
+          />
+
+          {/* End Dots (Shining nodes) */}
+          <motion.path
+            d="M -50 220 H 150 V 100 H 250"
+            fill="none"
+            stroke="rgba(196, 181, 253, 0.5)"
+            strokeWidth="2"
+            filter="url(#neon-glow)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 2.5, ease: "easeInOut", delay: 0.4, repeat: Infinity, repeatType: "reverse" }}
+          />
+          <motion.path
+            d="M 1050 380 H 900 V 500 H 800"
+            fill="none"
+            stroke="rgba(147, 197, 253, 0.4)"
+            strokeWidth="2"
+            filter="url(#neon-glow)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 2.8, ease: "easeInOut", delay: 0.9, repeat: Infinity, repeatType: "reverse" }}
+          />
+
+          {[
+            { cx: 250, cy: 100, delay: 0.4 },
+            { cx: 800, cy: 500, delay: 0.9 },
+            { cx: 400, cy: 100, delay: 1.5 },
+            { cx: 600, cy: 50, delay: 1.5 },
+            { cx: 350, cy: 500, delay: 0.2 },
+            { cx: 650, cy: 550, delay: 0.2 },
+          ].map((node, i) => (
+            <motion.circle
+              key={`endnode-${i}`}
+              cx={node.cx}
+              cy={node.cy}
+              r="6"
+              fill="#ffffff"
+              filter="url(#neon-glow)"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: [0, 1.5, 1], opacity: [0, 1, 0.8] }}
+              transition={{ duration: 2, delay: node.delay, repeat: Infinity, repeatType: "reverse" }}
+            />
+          ))}
+
+          {/* Traveling particles along the wires */}
+          {[
+            { cx: 200, cy: 270, delay: 1 },
+            { cx: 300, cy: 330, delay: 2 },
+            { cx: 700, cy: 150, delay: 1.2 },
+            { cx: 800, cy: 450, delay: 2.2 },
+          ].map((dot, i) => (
+            <motion.circle
+              key={`particle-${i}`}
+              cx={dot.cx}
+              cy={dot.cy}
+              r="3"
+              fill="rgba(255, 255, 255, 0.9)"
+              filter="url(#neon-glow)"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: [0, 1, 0], scale: [0.5, 2, 0.5] }}
+              transition={{ duration: 1.5, delay: dot.delay, repeat: Infinity }}
+            />
+          ))}
+        </svg>
+
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <AnimatePresence mode="wait">
           <motion.div
             key={viewAs}
             initial={{ opacity: 0, y: 16 }}
@@ -558,7 +743,8 @@ export default function Landing() {
                   transition={{ duration: 0.45 }}
                   className="text-5xl md:text-7xl font-extrabold tracking-tight leading-none mx-auto max-w-5xl mb-6"
                 >
-                  Automate your<br className="hidden md:block" /> compliance roadmap.
+                  Automate your<br className="hidden md:block" /> {currentTypingText}
+                  <span className="inline-block w-[4px] h-[1em] bg-cs-50 ml-1 -mb-1 animate-pulse"></span>
                 </motion.h1>
                 <motion.p
                   initial={{ opacity: 0, y: 18 }}
@@ -585,29 +771,7 @@ export default function Landing() {
             )}
           </motion.div>
         </AnimatePresence>
-
-        {/* Mock browser preview */}
-        {viewAs === "business" && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 28 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.25 }}
-            className="mt-16 max-w-3xl mx-auto bg-cs-50 rounded-t-xl overflow-hidden"
-          >
-            <div className="flex gap-1.5 p-3 bg-cs-100">
-              <span className="w-2.5 h-2.5 rounded-full bg-cs-300" />
-              <span className="w-2.5 h-2.5 rounded-full bg-cs-300" />
-              <span className="w-2.5 h-2.5 rounded-full bg-cs-300" />
-            </div>
-            <div className="h-48 bg-gradient-to-br from-cs-700 to-cs-400 flex items-center justify-center">
-              <div className="grid grid-cols-3 gap-3 w-72 rotate-[-6deg]">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className={`bg-white rounded-lg h-16 opacity-80 ${i === 0 || i === 3 ? "col-span-2" : ""}`} />
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
+        </div>
       </section>
 
       {/* ── ROLE PICKER (mobile-friendly banner) ── */}
@@ -630,67 +794,198 @@ export default function Landing() {
       </section>
 
       {/* ── STATS ── */}
-      <section className="bg-white py-16 flex justify-center gap-12 md:gap-24 flex-wrap">
+      <section className="bg-white py-20 px-6 flex justify-center gap-8 md:gap-16 flex-wrap relative z-20 -mt-10">
         {viewAs === "ca"
-          ? [["3,000+", "CAs on platform"], ["₹4.2Cr+", "Client penalties avoided"], ["14-day", "Free trial, no card"]].map(([n, l]) => (
-            <div key={n} className="text-center">
-              <p className="text-4xl font-extrabold text-cs-900 tracking-tight">{n}</p>
-              <p className="text-cs-500 text-sm mt-1">{l}</p>
-            </div>
+          ? [["3,000+", "CAs on platform"], ["₹4.2Cr+", "Client penalties avoided"], ["14-day", "Free trial, no card"]].map(([n, l], idx) => (
+            <motion.div 
+              key={n} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="text-center bg-white rounded-2xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-100 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:border-cs-200 transition-all cursor-default w-72 bg-opacity-80 backdrop-blur-md"
+            >
+              <motion.p 
+                initial={{ scale: 0.8 }}
+                whileInView={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, delay: 0.2 + (idx * 0.1) }}
+                className="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cs-900 to-cs-600 mb-2"
+              >
+                {n}
+              </motion.p>
+              <p className="text-cs-500 font-medium">{l}</p>
+            </motion.div>
           ))
-          : [["6.3 Cr", "MSMEs — our target"], ["128+", "Compliances covered"], ["₹43,000", "Avg savings per user/year"]].map(([n, l]) => (
-            <div key={n} className="text-center">
-              <p className="text-4xl font-extrabold text-cs-900 tracking-tight">{n}</p>
-              <p className="text-cs-500 text-sm mt-1">{l}</p>
-            </div>
+          : [["6.3 Cr", "MSMEs — our target"], ["128+", "Compliances covered"], ["₹43,000", "Avg savings per user/year"]].map(([n, l], idx) => (
+            <motion.div 
+              key={n} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="text-center bg-white rounded-2xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-100 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:border-cs-200 transition-all cursor-default w-72 bg-opacity-80 backdrop-blur-md"
+            >
+              <motion.p 
+                initial={{ scale: 0.8 }}
+                whileInView={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200, delay: 0.2 + (idx * 0.1) }}
+                className="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cs-900 to-cs-600 mb-2"
+              >
+                {n}
+              </motion.p>
+              <p className="text-cs-500 font-medium">{l}</p>
+            </motion.div>
           ))
         }
       </section>
 
       {/* ── FEATURES ── */}
-      <section className="py-20 px-6 bg-cs-50 text-center">
-        <p className="text-xs font-bold tracking-widest text-cs-500 uppercase mb-2">Capabilities</p>
-        <h2 className="text-3xl font-bold text-cs-900 mb-12">Engineered for precision.</h2>
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 text-left">
-          {FEATURES.map((f) => (
+      <section className="py-28 px-6 bg-slate-50 text-center relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none z-0 opacity-50"></div>
+        <div className="absolute left-0 right-0 top-10 -z-0 m-auto h-[300px] w-[300px] rounded-full bg-cs-400/20 blur-[80px]"></div>
+
+        {/* Badge */}
+        <div className="relative z-10 flex justify-center mb-6">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm"
+          >
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cs-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cs-600"></span>
+            </span>
+            <span className="text-xs font-bold tracking-widest text-slate-600 uppercase">Core Capabilities</span>
+          </motion.div>
+        </div>
+
+        {/* Heading */}
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="relative z-10 text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-16 tracking-tight max-w-3xl mx-auto"
+        >
+          Engineered for <span className="text-transparent bg-clip-text bg-gradient-to-r from-cs-600 to-indigo-500">precision.</span>
+        </motion.h2>
+
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 text-left relative z-10">
+          {FEATURES.map((f, idx) => (
             <motion.div
               key={f.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3 }}
-              whileHover={{ scale: 1.02 }}
-              className="bg-white border border-cs-100 rounded-2xl p-6"
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              whileHover={{ scale: 1.03, y: -5 }}
+              className="group relative overflow-hidden bg-slate-50 border border-slate-200 rounded-2xl p-6 hover:shadow-xl hover:border-cs-300 transition-all cursor-pointer"
             >
-              <div className="w-9 h-9 rounded-full bg-cs-100 flex items-center justify-center text-cs-600 mb-4">
-                <f.icon size={18} />
+              {/* Anime Flash Shiny Effect */}
+              <div className="absolute inset-0 -translate-x-[150%] w-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white to-transparent opacity-90 z-10 pointer-events-none skew-x-[-25deg]" />
+              
+              {/* Content */}
+              <div className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-cs-500 mb-4 group-hover:bg-cs-900 group-hover:text-white transition-colors duration-300 relative z-20 shadow-sm">
+                <f.icon size={20} />
               </div>
-              <h3 className="font-bold text-cs-900 text-base mb-1">{f.title}</h3>
-              <p className="text-cs-500 text-sm leading-relaxed">{f.desc}</p>
+              <h3 className="font-bold text-cs-900 text-base mb-2 relative z-20 group-hover:text-cs-700 transition-colors">{f.title}</h3>
+              <p className="text-cs-500 text-sm leading-relaxed relative z-20">{f.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section className="py-20 px-6 bg-white text-center">
-        <h2 className="text-3xl font-bold text-cs-900 mb-3">
-          {viewAs === "ca" ? "How CAs use ComplianceOS" : "The Implementation Path"}
-        </h2>
-        <p className="text-cs-400 text-sm mb-14">
+      <section className="py-28 px-6 bg-white text-center relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none z-0 opacity-50"></div>
+        <div className="absolute left-0 right-0 top-20 -z-0 m-auto h-[250px] w-[400px] rounded-full bg-cs-400/10 blur-[80px]"></div>
+
+        {/* Badge */}
+        <div className="relative z-10 flex justify-center mb-6">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-50 border border-slate-200 shadow-sm"
+          >
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cs-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cs-600"></span>
+            </span>
+            <span className="text-xs font-bold tracking-widest text-slate-600 uppercase">
+              {viewAs === "ca" ? "For CAs" : "Your Journey"}
+            </span>
+          </motion.div>
+        </div>
+
+        {/* Heading */}
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="relative z-10 text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight max-w-3xl mx-auto"
+        >
+          {viewAs === "ca" ? "How CAs use " : "The "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cs-600 to-indigo-500">
+            {viewAs === "ca" ? "ComplianceOS" : "Implementation Path"}
+          </span>
+        </motion.h2>
+
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-cs-500 text-lg mb-24 relative z-10"
+        >
           {viewAs === "ca" ? "Three steps to managing all your clients in one place." : "Three steps to operational mastery."}
-        </p>
-        <div className="max-w-3xl mx-auto flex flex-col md:flex-row gap-10 justify-center">
-          {(viewAs === "ca"
-            ? [["1", "CONNECT", "Add clients or let them invite you — they share their full profile."], ["2", "MONITOR", "One dashboard shows every client's calendar, filings, and risk status."], ["3", "APPROVE", "Review scheme applications, annotate documents, approve filings."],]
-            : [["1", "CONNECT", "Link your GST, MSME, and document sources via VEDA."], ["2", "AUTOMATE", "ARIA and SCOUT map your profile to schemes and deadlines."], ["3", "REPORT", "Generate audit-ready reports and file through PATHWAY."],]
-          ).map(([num, title, desc]) => (
-            <div key={num} className="flex-1 flex flex-col items-center">
-              <div className="w-9 h-9 rounded-lg bg-cs-900 text-cs-50 flex items-center justify-center font-bold text-sm mb-4">{num}</div>
-              <p className="font-bold text-cs-900 text-xs tracking-widest mb-2">{title}</p>
-              <p className="text-cs-500 text-sm">{desc}</p>
-            </div>
-          ))}
+        </motion.p>
+
+        <div className="max-w-5xl mx-auto relative z-10">
+          {/* Connecting dotted line for md/lg screens */}
+          <div className="hidden md:block absolute top-[40px] left-[15%] right-[15%] h-[3px] bg-[linear-gradient(to_right,#cbd5e1_50%,transparent_50%)] bg-[size:16px_3px] opacity-70 z-0"></div>
+          {/* Connecting dotted line for mobile screens */}
+          <div className="md:hidden absolute top-[5%] bottom-[5%] left-[50%] -translate-x-[1.5px] w-[3px] bg-[linear-gradient(to_bottom,#cbd5e1_50%,transparent_50%)] bg-[size:3px_16px] opacity-70 z-0"></div>
+
+          <div className="flex flex-col md:flex-row gap-16 md:gap-4 justify-between relative z-10">
+            {(viewAs === "ca"
+              ? [["1", "CONNECT", "Add clients or let them invite you — they share their full profile."], ["2", "MONITOR", "One dashboard shows every client's calendar, filings, and risk status."], ["3", "APPROVE", "Review scheme applications, annotate documents, approve filings."],]
+              : [["1", "CONNECT", "Link your GST, MSME, and document sources via VEDA."], ["2", "AUTOMATE", "ARIA and SCOUT map your profile to schemes and deadlines."], ["3", "REPORT", "Generate audit-ready reports and file through PATHWAY."],]
+            ).map(([num, title, desc], idx) => (
+              <motion.div 
+                key={num} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.2 }}
+                className="flex-1 flex flex-col items-center group relative"
+              >
+                {/* Shiny Neon Round Black Number */}
+                <div className="w-20 h-20 rounded-full bg-black text-white flex items-center justify-center font-extrabold text-3xl mb-8 relative shadow-[0_0_15px_rgba(0,0,0,0.8)] border border-slate-700 group-hover:shadow-[0_0_35px_rgba(99,102,241,1)] group-hover:border-indigo-400 group-hover:scale-110 transition-all duration-500 z-10">
+                  {/* Outer pulse */}
+                  <div className="absolute inset-0 rounded-full border border-indigo-400/50 animate-pulse opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  {/* Inner shine */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent"></div>
+                  
+                  <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400 drop-shadow-md">{num}</span>
+                </div>
+                
+                {/* Step Content */}
+                <div className="bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-slate-200 shadow-xl group-hover:border-cs-300 group-hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 w-full max-w-[300px]">
+                  <p className="font-extrabold text-slate-900 text-sm tracking-widest mb-3 uppercase group-hover:text-cs-600 transition-colors">{title}</p>
+                  <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
