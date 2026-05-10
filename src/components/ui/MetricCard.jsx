@@ -31,19 +31,20 @@ export default function MetricCard({
       variants={cardVariants}
       initial="initial"
       animate="animate"
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.2 }}
-      className="bg-white border border-cs-100 rounded-2xl p-6 flex flex-col gap-3"
+      className="bg-white/80 backdrop-blur-md border border-cs-100 rounded-3xl p-6 flex flex-col gap-3 group relative overflow-hidden transition-all duration-500 hover:shadow-[0_15px_40px_rgb(0,0,0,0.08)] hover:border-cs-300 hover:-translate-y-2 cursor-default"
     >
+      {/* Anime shiny hover sweep */}
+      <div className="absolute inset-0 -translate-x-[150%] w-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white to-transparent opacity-80 z-0 pointer-events-none skew-x-[-25deg]" />
+
       {/* Top row */}
-      <div className="flex items-start justify-between">
-        <div className="w-10 h-10 rounded-full bg-cs-100 flex items-center justify-center text-cs-600">
+      <div className="flex items-start justify-between relative z-10">
+        <div className="w-11 h-11 rounded-2xl bg-white border border-cs-100 flex items-center justify-center text-cs-600 group-hover:bg-cs-900 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:scale-110">
           {icon}
         </div>
 
         {trendValue && (
           <span
-            className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-full ${trendConfig[trend].bg} ${trendConfig[trend].color}`}
+            className={`inline-flex items-center gap-1 text-[10px] font-extrabold tracking-wide uppercase px-2 py-1 rounded-full border border-transparent group-hover:border-cs-200 transition-colors duration-300 shadow-sm ${trendConfig[trend].bg} ${trendConfig[trend].color}`}
           >
             <TrendIcon size={12} />
             {trendValue}
@@ -52,13 +53,13 @@ export default function MetricCard({
       </div>
 
       {/* Value */}
-      <div>
-        <p className="text-3xl font-bold text-cs-900 tracking-tight leading-none">
+      <div className="relative z-10 mt-1">
+        <p className="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-none group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-slate-900 group-hover:to-cs-600 transition-all duration-300">
           {value}
         </p>
-        <p className="text-cs-600 text-sm font-medium mt-1">{title}</p>
+        <p className="text-cs-600 text-sm font-bold mt-2">{title}</p>
         {subtitle && (
-          <p className="text-cs-400 text-xs mt-0.5">{subtitle}</p>
+          <p className="text-slate-400 text-xs mt-0.5">{subtitle}</p>
         )}
       </div>
     </motion.div>

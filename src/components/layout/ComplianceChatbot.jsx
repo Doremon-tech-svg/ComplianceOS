@@ -4,7 +4,7 @@ import { X, Send, Bot, Sparkles, ChevronDown, RotateCcw, Scale } from "lucide-re
 
 // ─── Groq config ──────────────────────────────────────────────────────────────
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
-const GROQ_API_KEY = "groq"; // 🔑 Replace with your Groq API key
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY || "";
 const GROQ_MODEL = "llama-3.1-8b-instant";
 
 const SYSTEM_PROMPT = `You are CABot — a senior Chartered Accountant and business compliance expert for Indian SMEs. You speak with authority, warmth, and precision, like a trusted CA who knows the business owner personally.

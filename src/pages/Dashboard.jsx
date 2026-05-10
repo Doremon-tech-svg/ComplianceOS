@@ -338,8 +338,10 @@ Return ONLY valid JSON. No markdown, no backticks.`;
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6 bg-gradient-to-r from-cs-900 to-cs-700 rounded-2xl px-6 py-5 flex items-start justify-between gap-4"
+            className="mb-6 bg-gradient-to-br from-cs-900 to-cs-700 rounded-3xl px-6 py-5 flex items-start justify-between gap-4 shadow-xl shadow-cs-900/10 hover:shadow-2xl hover:shadow-cs-900/20 transition-all duration-500 hover:-translate-y-1 group relative overflow-hidden border border-cs-800 cursor-default"
           >
+            {/* Ambient shine */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none" />
             <div>
               <p className="text-cs-300 text-xs font-bold tracking-widest uppercase mb-1">
                 Welcome back
@@ -371,7 +373,7 @@ Return ONLY valid JSON. No markdown, no backticks.`;
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-6 bg-amber-50 border border-amber-200 rounded-2xl px-5 py-4 flex items-start gap-3"
+          className="mb-6 bg-amber-50/80 backdrop-blur-md border border-amber-200 rounded-3xl px-5 py-4 flex items-start gap-3 hover:shadow-lg hover:shadow-amber-100/50 hover:border-amber-300 transition-all duration-500 hover:-translate-y-1 group"
         >
           <div className="w-8 h-8 rounded-full bg-amber-200 flex items-center justify-center text-amber-700 flex-shrink-0 mt-0.5">
             <Sparkles size={15} />
@@ -430,7 +432,7 @@ Return ONLY valid JSON. No markdown, no backticks.`;
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-5">
 
           {/* Compliance Chart */}
-          <div className="bg-white border border-cs-100 rounded-2xl p-6 min-h-[360px]">
+          <div className="bg-white/80 backdrop-blur-md border border-cs-100 rounded-3xl p-6 min-h-[360px] hover:shadow-[0_15px_40px_rgb(0,0,0,0.06)] hover:border-cs-300 transition-all duration-500 hover:-translate-y-2 group">
             <div className="flex items-center justify-between mb-6">
               <h2 className="font-bold text-cs-900 text-lg">Compliance Overview</h2>
               <div className="flex items-center gap-1.5 border border-cs-200 rounded-lg px-3 py-1.5 text-sm text-cs-600">
@@ -460,7 +462,7 @@ Return ONLY valid JSON. No markdown, no backticks.`;
           </div>
 
           {/* Tools */}
-          <div className="bg-white border border-cs-100 rounded-2xl p-6">
+          <div className="bg-white/80 backdrop-blur-md border border-cs-100 rounded-3xl p-6 hover:shadow-[0_15px_40px_rgb(0,0,0,0.06)] hover:border-cs-300 transition-all duration-500 hover:-translate-y-2 group">
             <h2 className="font-bold text-cs-900 text-lg mb-5">Tools</h2>
             <div className="grid grid-cols-2 gap-4">
               {[
@@ -567,7 +569,7 @@ Return ONLY valid JSON. No markdown, no backticks.`;
           </div>
 
           {/* CA Mini Card — opens modal */}
-          <div className="bg-white border border-cs-100 rounded-2xl p-6 text-center flex flex-col items-center gap-3">
+          <div className="bg-white/80 backdrop-blur-md border border-cs-100 rounded-3xl p-6 text-center flex flex-col items-center gap-3 hover:shadow-[0_15px_40px_rgb(0,0,0,0.06)] hover:border-cs-300 transition-all duration-500 hover:-translate-y-2 group">
             <div className="w-14 h-14 rounded-full bg-cs-200 flex items-center justify-center font-bold text-cs-800 text-xl">
               RK
             </div>
